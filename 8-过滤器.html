@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 过滤器常用来处理文本格式化的操作，可以用在两个地方：双括号插值和 v-bind 表达式 -->
+  <div id="app">
+    <ul>
+      <li v-for="user in users" :key="user.id">
+        {{user.id}} ==> {{user.name}} ==> {{user.gender|gFilter}}
+      </li>
+    </ul>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    // 全局过滤器
+    Vue.filter("gFilter", (val) => {
+      return val == 1 ? '男~~' : '女~~';
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+       users: [
+         { id: 1, name: 'jacky', gender: 1 },
+         { id: 2, name: 'peter', gender: 0 }
+       ]
+      },
+      filters: {
+        genderFilter(val) {
+          if (val == 1) {
+            return '男';
+          } else {
+            return '女';
+          }
+        }
+      }
+    });
+ </script>
+</body>

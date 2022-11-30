@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <!-- v-on:click 事件绑定 -->
+    <button v-on:click="num++">点赞</button>
+     <!-- v-on:click 可以简写为 @click -->
+    <button @click="cancel()">取消</button>
+    <h1>有{{num}}个人为他点赞。</h1>
+
+    <!-- 点击小div会有两次弹框，这是事件冒泡，如何防止？事件修饰符 -->
+      <!-- .stop 阻止事件冒泡 -->
+      <!-- .prevent 阻止默认事件发生 -->
+      <!-- .capture 使用事件捕获模式 -->
+      <!-- .self 只有元素自身触发事件才能执行 -->
+      <!-- .once 只执行一次 -->
+    <div style="border:1px solid red;padding:20px;" @click.once="hello">
+      大div
+      <div style="border:1px solid blue;padding:20px;" @click.stop="hello">
+        小div
+        <a href="https://www.baidu.com" @click.prevent.stop="hello">去百度</a>
+      </div>
+    </div>
+
+    <!-- 按键修饰符 -->
+    <input type="text" v-model="num" 
+      v-on:keyup.up="num+=2" v-on:keyup.down="num-=2"
+      @click.ctrl="num=10"><br>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        num: 1
+      },
+      methods: {
+        cancel() {
+          this.num--;
+        },
+        hello() {
+          alert('点击了');
+        }
+      }
+    });
+    
+  </script>
+</body>
+
+</html>

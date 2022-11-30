@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- 插值表达式 显示：<h1>Hello</h1> 2 world -->
+    <!-- 会有插值闪烁 插值表达式只能用在标签体里面 -->
+    {{ msg }} {{ 1 + 1 }} {{ hello() }}<br>
+    <!-- 不会转义，显示 HTML 内容 -->
+    <span v-html="msg"></span><br>
+    <!-- 转义，显示原本内容 -->
+    <span v-text="msg"></span><br>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        msg: "<h1>Hello</h1>"
+      },
+      methods: {
+        hello() {
+          return "world";
+        },
+      }
+    });
+    
+  </script>
+</body>
+
+</html>
